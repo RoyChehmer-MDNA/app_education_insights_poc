@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="dark"><head><meta charset="utf-8"><title>דוח נוכחות</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="{{ url_for('static', filename='theme.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}"></head>
+<body class="report-page"><div class="report-actions"><button onclick="window.print()">הדפסה / שמירה כ־PDF</button><button type="button" class="theme-toggle" data-theme-toggle aria-label="מעבר למצב בהיר" aria-pressed="true">☀ מצב בהיר</button></div><h1>דוח נוכחות</h1>
+<p>בתי ספר: {{ stats.schools }} | ממוצע נוכחות: {{ stats.average }}% | שינוי: {{ stats.decline }} נקודות אחוז | חריגות: {{ stats.flagged }}</p>
+<table><thead><tr><th>סמל</th><th>בית ספר</th><th>שכבה</th><th>תקופה קודמת</th><th>תקופה נוכחית</th><th>תלמידים</th></tr></thead><tbody>
+{% for r in rows %}<tr><td>{{ r.school_id }}</td><td>{{ r.school }}</td><td>{{ r.grade }}</td><td>{{ r.previous }}%</td><td>{{ r.current }}%</td><td>{{ r.students }}</td></tr>{% endfor %}</tbody></table>
+<p>הנתונים מתארים שינוי בנוכחות ואינם מוכיחים את הסיבות לו. הממוצע הוא ממוצע פשוט בין בתי הספר.</p></body></html>

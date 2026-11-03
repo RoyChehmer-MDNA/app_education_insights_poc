@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="{{ url_for('static', filename='theme.js') }}"></script>
+<title>משל״ט – תובנות נוכחות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=Rubik:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='original_mockup.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='poc.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='workspace.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='portal.css') }}">
+</head>
+<body data-chat="closed" data-view="portal">
+<header class="topnav"><div class="tn-logo">✦ משל״ט <small>· משרד החינוך</small></div><nav class="tn-items" aria-label="ניווט ראשי"><button id="portal-home" type="button" class="tn-btn" aria-current="page">דף הבית</button><button id="portal-attendance" type="button" class="tn-btn">נוכחות</button><button id="portal-spots" type="button" class="tn-btn">זרקורים</button></nav><button id="open-chat" type="button" class="open-chat-button" aria-expanded="false" aria-controls="chat-panel">✦ שאלי את הנתונים</button><button id="toggle-chat-data" type="button" aria-expanded="false" aria-controls="main-content">הצגת נתונים</button><button type="button" class="theme-toggle" data-theme-toggle aria-label="מעבר למצב בהיר" aria-pressed="true">☀ מצב בהיר</button><div class="tn-avatar" aria-label="משתמשת">מ</div></header>
+<div class="poc-shell">
+<main id="main-content">
+<iframe id="content-portal" src="/content-portal" title="עולמות התוכן והזרקורים" referrerpolicy="same-origin"></iframe>
+<div id="attendance-screen">
+  <div class="home-hero"><div class="hh-text"><span class="hero-kicker">שולחן העבודה שלך</span><h1>ברוכים הבאים למשל״ט</h1><p>תמונת מצב ממוקדת לנוכחות בשכבה ד׳</p></div></div>
+  <div class="poc-content">
+    <div class="poc-top"><div><span class="section-eyebrow">01 · סקירה</span><h2>זרקורים · נוכחות תלמידים</h2><p class="section-help">התחילי במדדים המרכזיים, ואז בדקי באילו בתי ספר השינוי בולט.</p></div><span id="data-badge" class="poc-badge">טוען נתונים...</span></div>
+
+    <form id="dashboard-chat-form" class="dashboard-chat-entry chart-card">
+      <div><strong>✦ שאלי את הנתונים</strong><p>בדקי ממצאים, השווי בין בתי ספר והמשיכי לשיחה על הנתונים.</p></div>
+      <label for="dashboard-question">מה תרצי לבדוק?</label>
+      <div class="dashboard-chat-input"><input id="dashboard-question" maxlength="800" placeholder="באילו בתי ספר הירידה בנוכחות בולטת?" required><button type="submit">פתיחת שיחה</button></div>
+    </form>
+    <section class="analysis-scope"><div><span class="section-eyebrow">נתונים לשיחה</span><strong>נוכחות בתי הספר</strong></div><label>היקף הניתוח <select id="school-scope"><option value="">כל בתי הספר</option></select></label></section>
+    <div class="summary" id="summary" aria-label="מדדי נוכחות"><div class="sum">טוען נתונים...</div></div>
+    <div class="poc-grid">
+       <section class="spot" data-kind="bad"><div class="spot-top"><span class="kind">חריגה בנוכחות</span><span class="school-tag">פיקוח · 4 בתי ספר</span></div><h3>נוכחות שכבה ד׳ בירידה</h3><p class="why">מה גורם לירידה, באילו בתי ספר היא בולטת, ומה כדאי לבדוק?</p><div class="poc-note"><strong>איך להשתמש:</strong> התחילי מהחריגה, השווי בין בתי הספר, ואז שאלי את העוזר על נקודה שמעניינת אותך.</div></section>
+       <section class="chart-card"><div class="cc-head"><div><span class="section-eyebrow">02 · השוואה</span><h3>נוכחות לפי בית ספר</h3></div><span class="chart-caption">השוואה בין תקופות</span></div><div class="poc-bars" id="bars" aria-label="השוואת שיעורי נוכחות לפי בית ספר"></div><div class="legend"><span><i class="legend-swatch previous"></i>תקופה קודמת</span><span><i class="legend-swatch current"></i>תקופה נוכחית</span></div></section>
+    </div>
+    <section class="chart-card data-card"><div class="cc-head"><div><span class="section-eyebrow">03 · פירוט</span><h3>נתוני הבדיקה</h3></div><span class="chart-caption">המספרים שמאחורי התמונה</span></div><div class="tbl-wrap"><table class="t"><thead><tr><th>בית ספר</th><th>שכבה</th><th>תקופה קודמת</th><th>תקופה נוכחית</th><th>שינוי</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+    <section id="workspace-panel" class="chart-card" style="padding:20px;margin-bottom:20px">
+      <h3>סביבת עבודה</h3>
+      <form id="upload-form"><label>ייבוא נוכחות (CSV UTF-8) <input id="attendance-file" type="file" accept=".csv" required></label><button>ייבוא</button><button id="reset-data" type="button">איפוס הנתונים</button></form>
+      <p>עמודות: school_id, school, grade, previous, current, students. סמלי מוסדות מורשים: 1001–1004. שורה אחת למוסד.</p>
+      <a href="/reports/attendance" target="_blank" rel="noopener">פתיחת דוח להדפסה / שמירה כ־PDF</a>
+      <form id="profile-form"><label>שם תצוגה <input id="display-name" maxlength="120"></label><label>תפקיד תצוגה <input id="profile-role" maxlength="120"></label><label>מחוז <input id="profile-district" maxlength="120"></label><button>שמירת פרופיל</button></form>
+      <button id="new-conversation" type="button">שיחה חדשה</button><p id="workspace-status" role="status"></p>
+      <h4>מעקב פערי נוכחות</h4><p>פער נפתח בעת ניתוח ירידה של 5 נקודות אחוז לפחות. סגירה היא ידנית.</p><div id="gaps"></div>
+    </section>
+  </div>
+</div>
+</main>
+<aside id="chat-panel" class="poc-chat" aria-label="עוזר AI לניתוח נוכחות"><div class="poc-chat-head"><div class="chat-user-heading"><span class="chat-user-mark" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="m3 8 9-5 9 5-9 5-9-5Z" fill="currentColor"/><path d="m4 12 8 4.5 8-4.5M4 16l8 4.5 8-4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>שולחן העבודה למפקח · שיחה</strong><p id="chat-user-details" aria-label="פרטי המשתמש" aria-live="polite"></p></div></div><div class="chat-panel-actions"><button id="edit-chat-profile" type="button">עריכת פרופיל</button><button id="chat-new" type="button">＋ שיחה חדשה</button><button id="close-chat" type="button">חזרה לדשבורד ←</button></div></div><div class="poc-messages" id="messages" aria-live="polite" aria-label="שיחה עם העוזר"><div class="poc-bot">שלום! אפשר לשאול אותי על הירידה בנוכחות, לבקש השוואה או המלצה לפעולה.</div></div><form id="chat-form" class="poc-form"><label for="question">מה תרצי לבדוק?</label><textarea id="question" rows="2" maxlength="800" placeholder="למה הנוכחות בשכבה ד׳ ירדה?" required></textarea><button type="submit" class="poc-send">שליחת שאלה</button><button id="starter" type="button" class="poc-secondary">נסי שאלה לדוגמה</button></form></aside>
+</div>
+<script src="{{ url_for('static', filename='poc.js', v='20261103-2') }}"></script>
+<script src="{{ url_for('static', filename='workspace.js') }}"></script>
+<script src="{{ url_for('static', filename='portal.js') }}"></script>
+</body></html>

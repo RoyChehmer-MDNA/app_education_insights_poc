@@ -1,0 +1,9 @@
+#content-portal { display:none; width:100%; border:0; height:calc(100dvh - 54px); background:var(--ground); }
+body[data-view="portal"] #content-portal { display:block; }
+body[data-view="portal"] #attendance-screen { display:none; }
+body[data-chat="open"][data-view="portal"] #content-portal { height:100%; }
+.tn-btn[aria-current="page"] { color:var(--brand-ink); border-bottom-color:var(--brand); font-weight:700; }
+button.tn-btn { background:transparent; border:0; border-bottom:3px solid transparent; border-radius:0; }
+button.tn-btn[aria-current="page"] { border-bottom-color:var(--brand); }
+button.tn-btn:hover { background:var(--brand-soft); }
+@media (max-width:900px) { #content-portal { height:calc(100dvh - 90px); } }
